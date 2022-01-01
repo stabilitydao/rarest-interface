@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
-
-const Home: NextPage = () => {
-  return (
-    <div className="h-screen w-screen text-white bg-orange-600 flex justify-center items-center">
-      <h1 className="sm:text-7xl text-4xl">RAREST-MARKET</h1>
-    </div>
-  );
+import Home from "@/components/view/Home";
+const home: NextPage = () => {
+  return <Home />;
 };
 
-export default Home;
+export default home;
