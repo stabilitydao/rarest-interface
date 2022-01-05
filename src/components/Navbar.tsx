@@ -5,7 +5,6 @@ import { MoonIcon, SunIcon } from "@heroicons/react/solid";
 function Navbar() {
   const [Mounted, setMounted] = useState(false);
   const { setTheme, systemTheme, theme } = useTheme();
-  console.log(theme);
   useEffect(() => {
     setMounted(true);
   }, []);
