@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { FaEthereum } from "react-icons/fa";
 function BidItem() {
   return (

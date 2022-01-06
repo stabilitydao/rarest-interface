@@ -6,8 +6,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { injected } from "@/src/connectors";
+import { useWeb3React } from "@web3-react/core";
 function Navbar() {
+  const { activate, active, account, library } = useWeb3React();
   const [Sidebar, setSidebar] = useState<boolean>(false);
   const [Mounted, setMounted] = useState<boolean>(false);
   const { setTheme, systemTheme, theme } = useTheme();
@@ -19,6 +21,13 @@ function Navbar() {
   useEffect(() => {
     setMounted(true);
   }, []);
+  async function handleWalletConnect() {
+    try {
+      await activate(injected, undefined, true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   const themeChanger = () => {
     if (!Mounted) return null;
     const currentTheme = theme === "system" ? systemTheme : theme;
@@ -50,7 +59,7 @@ function Navbar() {
         <h1 className="text-3xl">Rarest</h1>
         <ul className="gap-x-6 text-lg font-normal hidden lg:flex">
           <li>
-            <Link href="/">
+            <Link href="/marketplace">
               <a>Marketplace</a>
             </Link>
           </li>
@@ -84,9 +93,18 @@ function Navbar() {
           }}
         />
         <div className=" flex-row gap-x-2 items-center hidden lg:flex">
-          <button className="flex items-center gap-x-1 btn">
+          <button
+            className="flex items-center gap-x-1 btn"
+            onClick={handleWalletConnect}
+          >
             <RiWallet3Line />
-            Connect Wallet
+            {active ? (
+              <span>
+                {account?.slice(0, -36)}...{account?.substring(38)}
+              </span>
+            ) : (
+              "Connect Wallet"
+            )}
           </button>
           {themeChanger()}
         </div>
@@ -100,10 +118,10 @@ function Navbar() {
         <h1 className="text-3xl ">Rarest</h1>
         <ul className="">
           <li className="">
-            <Link href="/">
+            <Link href="/marketplace">
               <a
                 className={`p-4 block ${
-                  activeRoute === "/"
+                  activeRoute === "/marketplace"
                     ? "bg-gradient-to-br text-white  from-sky-400 via-indigo-500 to-pink-500"
                     : ""
                 }`}
@@ -160,7 +178,10 @@ function Navbar() {
           />
         </div>
         <div className=" flex-row gap-x-2 items-center justify-center flex">
-          <button className="flex items-center gap-x-1 btn">
+          <button
+            className="flex items-center gap-x-1 btn"
+            onClick={handleWalletConnect}
+          >
             <RiWallet3Line />
             Connect Wallet
           </button>
