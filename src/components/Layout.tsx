@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           <meta name="description" content="Nft marketplace" />
           <link rel="icon" href=".png" />
         </Head>
-        <div className="font-Roboto dark:text-white bg-orange-300 dark:bg-orange-900">
+        <div className="font-Roboto text-cyan-900 dark:text-white bg-white dark:bg-slate-900">
           <Navbar />
           {children}
         </div>

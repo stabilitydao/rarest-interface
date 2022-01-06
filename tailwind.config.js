@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     darkMode: 'class',
     content: [
@@ -5,6 +7,21 @@ module.exports = {
         './src/pages/**/*.{ts,tsx,js,jsx}'
     ],
     theme: {
+        colors: {
+            transparent: 'transparent',
+            current: 'currentColor',
+            black: colors.black,
+            white: colors.white,
+            gray: colors.gray,
+            pink: colors.pink,
+            indigo: colors.indigo,
+            purple: colors.purple,
+            orange: colors.orange,
+            cyan: colors.cyan,
+            violet: colors.violet,
+            sky: colors.sky,
+            slate: colors.slate,
+        },
         extend: {
             fontFamily: {
                 Roboto: ['Roboto']
