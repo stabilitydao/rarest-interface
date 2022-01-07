@@ -69,7 +69,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/owned">
               <a>Owned</a>
             </Link>
           </li>
