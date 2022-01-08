@@ -52,7 +52,7 @@ function Owned() {
                 nftmarketaddress
             );
             const data = marketContract.methods
-                .fetchMyNFTs()
+                .fetchItemsCreated()
                 .call()
                 .then((result: any) => {
                     Promise.all(
@@ -97,7 +97,7 @@ function Owned() {
                         <span className="text-base dark:text-gray-200 ">
                             Home
                         </span>
-                        &#160;&#160;&#160;&#62;&#160;&#160;&#160;Owned
+                        &#160;&#160;&#160;&#62;&#160;&#160;&#160;Profile
                     </h1>
                 </div>
                 {active ? (
@@ -108,7 +108,7 @@ function Owned() {
                             })}
                         </div>
                     ) : (
-                        <h1>YOU DON'T OWN ANY NFT's</h1>
+                        <h1>YOU HAVEN"T CREATED ANY NFT</h1>
                     )
                 ) : (
                     <h1>
