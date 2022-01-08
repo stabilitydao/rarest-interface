@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import WEB3 from '@/src/functions/web3';
 import { useRouter } from 'next/router';
-import { create as ipfsHttpClient } from 'ipfs-http-client';
+import { create as ipfsHttpClient, Options } from 'ipfs-http-client';
 import { nftmarketaddress, nftaddress } from '@/src/config/';
 import Market from '@/src/abis/Market.json';
 import NFT from '@/src/abis/NFT.json';
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+const ipfsApi: Options | any = 'https://ipfs.infura.io:5001/api/v0';
+const client = ipfsHttpClient(ipfsApi);
+
 interface form {
     name: string;
     description: string;
