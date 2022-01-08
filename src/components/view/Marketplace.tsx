@@ -1,4 +1,3 @@
-import Hero from '../Hero';
 import { FaEthereum, FaHeart } from 'react-icons/fa';
 import WEB3 from '@/src/functions/web3';
 import { useWeb3React } from '@web3-react/core';
@@ -41,7 +40,7 @@ function MarketItem({ name, image, price, address, id }: item) {
     return (
         <div
             className="  rounded-md shadow-2xl group flex-1"
-            style={{ minWidth: '288px' }}
+            style={{ maxWidth: '288px' }}
         >
             <div className="aspect-square rounded-t-md overflow-hidden">
                 <img

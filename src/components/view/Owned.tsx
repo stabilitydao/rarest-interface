@@ -1,4 +1,3 @@
-import Hero from '../Hero';
 import { FaEthereum, FaHeart } from 'react-icons/fa';
 import WEB3 from '@/src/functions/web3';
 import { useWeb3React } from '@web3-react/core';
@@ -16,7 +15,7 @@ function MarketItem({ name, image, price }: item) {
     return (
         <div
             className="  rounded-md shadow-2xl group flex-1"
-            style={{ minWidth: '288px' }}
+            style={{ maxWidth: '288px' }}
         >
             <div className="aspect-square rounded-t-md overflow-hidden">
                 <img
@@ -42,7 +41,7 @@ function MarketItem({ name, image, price }: item) {
 }
 function Owned() {
     const [Items, setItems] = useState<any[]>([]);
-    const { active, library } = useWeb3React();
+    const { active, library, account } = useWeb3React();
     const web3 = WEB3();
     const useWeb3 = active ? library : web3;
     useEffect(() => {
@@ -51,8 +50,8 @@ function Owned() {
                 Market,
                 nftmarketaddress
             );
-            const data = marketContract.methods
-                .fetchMyNFTs()
+            marketContract.methods
+                .fetchMyNFTs(account)
                 .call()
                 .then((result: any) => {
                     Promise.all(

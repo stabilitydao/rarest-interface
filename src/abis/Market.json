@@ -45,13 +45,129 @@
             },
             {
                 "indexed": false,
-                "internalType": "bool",
-                "name": "sold",
-                "type": "bool"
+                "internalType": "enum Market.MarketItemStatus",
+                "name": "status",
+                "type": "uint8"
+            }
+        ],
+        "name": "MarketItemCancelled",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "itemId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "nftContract",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seller",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "enum Market.MarketItemStatus",
+                "name": "status",
+                "type": "uint8"
             }
         ],
         "name": "MarketItemCreated",
         "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "itemId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "nftContract",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seller",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "enum Market.MarketItemStatus",
+                "name": "status",
+                "type": "uint8"
+            }
+        ],
+        "name": "MarketItemSold",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "nftContract",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "itemId",
+                "type": "uint256"
+            }
+        ],
+        "name": "cancelMarketItem",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [
@@ -95,7 +211,13 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
         "name": "fetchItemsCreated",
         "outputs": [
             {
@@ -131,12 +253,12 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "bool",
-                        "name": "sold",
-                        "type": "bool"
+                        "internalType": "enum Market.MarketItemStatus",
+                        "name": "status",
+                        "type": "uint8"
                     }
                 ],
-                "internalType": "struct NFTMarket.MarketItem[]",
+                "internalType": "struct Market.MarketItem[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -181,12 +303,12 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "bool",
-                        "name": "sold",
-                        "type": "bool"
+                        "internalType": "enum Market.MarketItemStatus",
+                        "name": "status",
+                        "type": "uint8"
                     }
                 ],
-                "internalType": "struct NFTMarket.MarketItem[]",
+                "internalType": "struct Market.MarketItem[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -195,7 +317,13 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
         "name": "fetchMyNFTs",
         "outputs": [
             {
@@ -231,12 +359,12 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "bool",
-                        "name": "sold",
-                        "type": "bool"
+                        "internalType": "enum Market.MarketItemStatus",
+                        "name": "status",
+                        "type": "uint8"
                     }
                 ],
-                "internalType": "struct NFTMarket.MarketItem[]",
+                "internalType": "struct Market.MarketItem[]",
                 "name": "",
                 "type": "tuple[]"
             }

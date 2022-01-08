@@ -38,7 +38,6 @@ function Owned() {
     async function createMarket() {
         const { name, description, price } = formInput;
         if (!name || !description || !price || !fileUrl) return;
-        /* first, upload to IPFS */
         const data = JSON.stringify({
             name,
             description,
@@ -48,7 +47,6 @@ function Owned() {
             const added = await client.add(data);
             const url = `https://ipfs.infura.io/ipfs/${added.path}`;
             createitem(url);
-            console.log(url);
         } catch (error) {
             console.log('Error uploading file: ', error);
         }
@@ -56,23 +54,24 @@ function Owned() {
 
     async function createitem(url: string) {
         if (!active) return;
+        console.log('WORKING');
         const nftContract = new useWeb3.eth.Contract(NFT, nftaddress);
         const marketContract = new useWeb3.eth.Contract(
             Market,
             nftmarketaddress
         );
         try {
-            const tokenId = await nftContract.methods
+            const res = await nftContract.methods
                 .createToken(url.toString())
                 .send({ from: account });
+            const tokenId = res.events.Transfer.returnValues.tokenId;
             const price = useWeb3.utils.toWei(formInput.price, 'ether');
             const listingPrice = await marketContract.methods
                 .getListingPrice()
                 .call();
             await marketContract.methods
                 .createMarketItem(nftaddress, tokenId, price)
-                .send({ from: account, value: listingPrice.toString() });
-            router.push('/');
+                .send({ from: account, value: listingPrice });
         } catch (err) {
             console.log(err);
         }
