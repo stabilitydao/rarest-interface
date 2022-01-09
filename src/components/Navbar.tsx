@@ -56,7 +56,7 @@ function Navbar() {
     return (
         <nav className=" dark:bg-cyan-900 bg-white border-b border-gray-500 sticky top-0 z-10">
             <div className="flex flex-row h-20 items-center justify-between px-2 container mx-auto">
-                <h1 className="text-3xl">Rarest</h1>
+                <img src="/rarest/SIZE-512.png" alt="" width={80} height={80} />
                 <ul className="gap-x-6 text-lg font-normal hidden lg:flex">
                     <li>
                         <Link href="/marketplace">
