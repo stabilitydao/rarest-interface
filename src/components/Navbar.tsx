@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
-
+import Image from "next/image";
 function Navbar() {
   const [Mounted, setMounted] = useState(false);
   const { setTheme, systemTheme, theme } = useTheme();
-  console.log(theme);
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -36,7 +35,7 @@ function Navbar() {
   };
   return (
     <nav className="h-16 flex flex-row items-center justify-between px-6">
-      <h1 className="text-3xl">Rarest</h1>
+      <Image src="/rarest/SIZE-512.png" alt="" width={100} height={100} />
       {themeChanger()}
     </nav>
   );

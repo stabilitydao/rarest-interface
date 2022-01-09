@@ -8,7 +8,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <Head>
           <title>Rarest</title>
           <meta name="description" content="Nft marketplace" />
-          <link rel="icon" href=".png" />
+          <link rel="icon" href="/rarest/SIZE-57-FAVICON.png" />
         </Head>
         <div className="font-Roboto dark:text-white bg-orange-300 dark:bg-orange-900">
           <Navbar />
