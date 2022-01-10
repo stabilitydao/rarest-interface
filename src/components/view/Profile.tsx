@@ -6,12 +6,35 @@ import Market from '@/src/abis/Market.json';
 import NFT from '@/src/abis/NFT.json';
 import { nftmarketaddress } from '@/src/config/';
 import axios from 'axios';
+
 interface item {
     name: string;
     image: string;
     price: string;
+    address: string;
+    itemId: number;
+    status: number;
 }
-function MarketItem({ name, image, price }: item) {
+
+function MarketItem({ name, image, price, address, itemId, status }: item) {
+    const { active, library, account } = useWeb3React();
+    const web3 = WEB3();
+    const useWeb3 = active ? library : web3;
+    async function handleCancel() {
+        if (active) {
+            try {
+                const marketContract = new useWeb3.eth.Contract(
+                    Market,
+                    nftmarketaddress
+                );
+                await marketContract.methods
+                    .cancelMarketItem(address, itemId)
+                    .send({ from: account });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
     return (
         <div
             className="  rounded-md shadow-2xl group flex-1"
@@ -27,13 +50,38 @@ function MarketItem({ name, image, price }: item) {
             <div className="p-2 space-y-4">
                 <div className="flex justify-between">
                     <p>{name}</p>
-                    <p className="flex flex-rwo  items-center">
-                        <FaEthereum className="" />
-                        {price} ETH
-                    </p>
+                    {(function () {
+                        if (status == 0) {
+                            return (
+                                <p className="bg-green-500 px-1 rounded-full text-white">
+                                    Active
+                                </p>
+                            );
+                        } else if (status == 1) {
+                            return (
+                                <p className="bg-indigo-500 px-1 rounded-full text-white">
+                                    Sold
+                                </p>
+                            );
+                        } else {
+                            return (
+                                <p className="bg-red-500 px-1 rounded-full text-white">
+                                    Cancelled
+                                </p>
+                            );
+                        }
+                    })()}
                 </div>
-                <div className="flex justify-end">
-                    <FaHeart className="text-lg" />
+                <div className="flex justify-between">
+                    {status != 1 && status != 2 && (
+                        <button
+                            className=" px-4 rounded-full btn py-0"
+                            onClick={handleCancel}
+                        >
+                            Cancel
+                        </button>
+                    )}
+                    <FaHeart className="text-lg ml-auto" />
                 </div>
             </div>
         </div>
@@ -54,7 +102,6 @@ function Owned() {
                 .fetchItemsCreated(account)
                 .call()
                 .then((result: any) => {
-                    console.log(result);
                     Promise.all(
                         result.map(async (resultItem: any) => {
                             const tokenContract = new useWeb3.eth.Contract(
@@ -72,7 +119,10 @@ function Owned() {
                                     price: useWeb3.utils.fromWei(
                                         resultItem.price.toString(),
                                         'ether'
-                                    )
+                                    ),
+                                    address: resultItem.nftContract,
+                                    itemId: resultItem.itemId,
+                                    status: resultItem.status
                                 };
                                 return item;
                             } catch (err) {

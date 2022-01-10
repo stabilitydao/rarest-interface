@@ -56,7 +56,6 @@ function Owned() {
 
     async function createitem(url: string) {
         if (!active) return;
-        console.log('WORKING');
         const nftContract = new useWeb3.eth.Contract(NFT, nftaddress);
         const marketContract = new useWeb3.eth.Contract(
             Market,

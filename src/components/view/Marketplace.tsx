@@ -130,9 +130,9 @@ function Marketplace() {
                     </h1>
                 </div>
                 <div className="flex flex-row gap-2 flex-wrap py-5">
-                    {Items?.map((item, index) => {
+                    {/* {Items?.map((item, index) => {
                         return <MarketItem key={index} {...item} />;
-                    })}
+                    })} */}
                 </div>
             </div>
         </section>
